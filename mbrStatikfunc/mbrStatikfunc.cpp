@@ -2,17 +2,20 @@
 #include <string>
 using namespace std;
 
-
 class mahasiswa
 {
-public:
+private:
 	static int nim;
+
+public:
 	int id;
 	string nama;
 
 	void setID();
-
 	void printAll();
+
+	static void setNim(int pNim) { nim = pNim; }
+	static int getNim() { return nim; }
 	mahasiswa(string pnama)
 	{
 		nama = pnama;
@@ -20,10 +23,11 @@ public:
 	}
 };
 
-int mahasiswa::nim = 113;
+int mahasiswa::nim = 0;
+
 void mahasiswa::setID()
 {
-	id = nim++;
+	id = ++nim;
 }
 
 void mahasiswa::printAll()
@@ -35,14 +39,20 @@ void mahasiswa::printAll()
 
 int main()
 {
-	mahasiswa mhs1("Lia Kurnia");
-	mahasiswa mhs2("Asroni");
-	mahasiswa mhs3("Andi Kurniawan");
-	mahasiswa mhs4("Joko Purbo");
+	mahasiswa mhs1("Sri dadi");
+	mahasiswa mhs2("Budi janu");
+	
+	mahasiswa::setNim(9); // mengakses nim melalui static member full
+	mahasiswa mhs3("Andi janu");
+	mahasiswa mhs4("Joko purbo");
 
 	mhs1.printAll();
+
 	mhs2.printAll();
 	mhs3.printAll();
 	mhs4.printAll();
+
+	cout << "akses dari luar object = " << mahasiswa::getNim() << endl;
+
 	return 0;
 }
